@@ -6,7 +6,7 @@ import numpy as np
 import argparse
 
 def sigmoid_activation(x):
-    return 1/(1+np.exp(x))
+    return 1/(1+np.exp(-x))
 
 def predict (X, W):
     preds = sigmoid_activation(X.dot(W))
@@ -36,7 +36,7 @@ for epoch in np.arange(0, args["epochs"]):
     losses.append(loss)
     gradient = trainX.T.dot(error)
 
-    W += args["alpha"] * gradient
+    W += -args["alpha"] * gradient
     if epoch == 0 or (epoch+1)%5 == 0:
         print("[INFO] epoch={}, losses={:.7f}".format(int(epoch+1), loss)) 
 
